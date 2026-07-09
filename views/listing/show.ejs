@@ -1,0 +1,238 @@
+<% layout('/layouts/boilerplate.ejs') %>
+
+<main class="min-h-screen bg-slate-50/50 py-12">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6">
+    
+    <!-- Breadcrumb -->
+    <nav class="flex mb-5 text-xs font-semibold text-gray-400 uppercase tracking-wider gap-2">
+      <a href="/wanderlust/listings" class="hover:text-brand-500 transition">Stays</a>
+      <span>/</span>
+      <span class="text-gray-600 truncate"><%= listing.title %></span>
+    </nav>
+
+    <!-- Main Detail Card -->
+    <div class="bg-white rounded-3xl border border-gray-100 shadow-premium overflow-hidden">
+      
+      <!-- Image Showcase -->
+      <div class="w-full aspect-[21/9] bg-zinc-100 relative">
+        <img
+          src="<%= listing.image.path %>"
+          alt="Stay Image"
+          loading="lazy"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+        
+        <!-- Quick Location Badge -->
+        <span class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md text-gray-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
+          <i class="fa-solid fa-location-dot text-brand-500 mr-1.5"></i>
+          <%= listing.location %>, <%= listing.country %>
+        </span>
+      </div>
+
+      <!-- Info Details -->
+      <div class="p-6 sm:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+          <div>
+            <h1 class="font-serif text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
+              <%= listing.title %>
+            </h1>
+            
+            <p class="text-sm font-semibold text-gray-550 mt-2">
+              Hosted by 
+              <span class="text-gray-900">
+                <%= listing.owner ? listing.owner.username : "Unknown Host" %>
+              </span>
+            </p>
+          </div>
+
+          <!-- Price Tag Box -->
+          <div class="bg-zinc-50 border border-zinc-100 rounded-2xl px-5 py-3 text-right sm:text-left self-start">
+            <span class="text-xxs font-bold text-gray-400 uppercase tracking-widest block mb-0.5">Price</span>
+            <span class="text-xl font-bold text-gray-950">
+              ₹<%= listing.price ? listing.price.toLocaleString('en-IN') : "N/A" %>
+            </span>
+            <span class="text-xs font-semibold text-gray-500"> / night</span>
+          </div>
+        </div>
+
+        <hr class="border-gray-100" />
+
+        <!-- Description -->
+        <div class="space-y-2">
+          <h3 class="text-md font-bold text-gray-900">About this place</h3>
+          <p class="text-gray-650 leading-relaxed text-sm whitespace-pre-line">
+            <%= listing.description %>
+          </p>
+        </div>
+
+        <!-- Management Buttons (Only for listing owner) -->
+        <% if (ReqUser && listing.owner && listing.owner._id.equals(ReqUser._id)) { %>
+          <div class="pt-4 flex flex-col sm:flex-row gap-3 border-t border-gray-100">
+            <a
+              href="/wanderlust/listings/<%= listing._id %>/edit"
+              class="flex-1 text-center bg-gray-900 hover:bg-gray-850 active:scale-98 text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-sm"
+            >
+              <i class="fa-regular fa-pen-to-square mr-1.5"></i>
+              Edit Listing
+            </a>
+
+            <form
+              action="/wanderlust/listings/<%= listing._id %>?_method=DELETE"
+              method="POST"
+              class="flex-1"
+            >
+              <button
+                type="submit"
+                class="w-full text-center bg-zinc-100 hover:bg-rose-50 hover:text-brand-600 active:scale-98 text-gray-700 px-6 py-3 rounded-xl font-bold text-sm transition-all border border-transparent hover:border-brand-200"
+              >
+                <i class="fa-regular fa-trash-can mr-1.5"></i>
+                Delete Listing
+              </button>
+            </form>
+          </div>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- Review Section -->
+    <div class="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Review Input Form -->
+      <% if (ReqUser) { %>
+        <div class="lg:col-span-5 bg-white border border-gray-100 rounded-3xl p-6 shadow-premium h-fit">
+          <h2 class="text-lg font-bold text-gray-900 mb-5">
+            Leave a Review
+          </h2>
+          
+          <form
+            action="/wanderlust/listings/<%= listing._id %>/reviews"
+            method="post"
+            class="space-y-4"
+          >
+            <!-- Rating Slot (starability) -->
+            <div>
+              <label class="block text-xs font-bold text-gray-550 uppercase tracking-wider mb-2">Rating</label>
+              <fieldset class="starability-slot">
+                <input
+                  type="radio"
+                  id="no-rate"
+                  class="input-no-rate"
+                  name="review[rating]"
+                  value="1"
+                  checked
+                  aria-label="No rating."
+                />
+                <input type="radio" id="second-rate1" name="review[rating]" value="1" />
+                <label for="second-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="second-rate2" name="review[rating]" value="2" />
+                <label for="second-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="second-rate3" name="review[rating]" value="3" />
+                <label for="second-rate3" title="Average">3 stars</label>
+                <input type="radio" id="second-rate4" name="review[rating]" value="4" />
+                <label for="second-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="second-rate5" name="review[rating]" value="5" />
+                <label for="second-rate5" title="Amazing">5 stars</label>
+              </fieldset>
+            </div>
+
+            <!-- Comment Input -->
+            <div>
+              <label class="block text-xs font-bold text-gray-550 uppercase tracking-wider mb-2">Comment</label>
+              <textarea
+                name="review[comment]"
+                rows="4"
+                required
+                minlength="10"
+                placeholder="Share your stay experience..."
+                class="peer w-full px-4 py-3 border border-gray-200 rounded-2xl bg-zinc-50 text-sm focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none transition invalid:border-red-200"
+              ></textarea>
+              <p class="mt-1 text-xs text-red-500 hidden peer-invalid:block peer-placeholder-shown:hidden">
+                Comment must be at least 10 characters.
+              </p>
+            </div>
+
+            <!-- Submit Review -->
+            <button
+              type="submit"
+              class="w-full bg-brand-500 hover:bg-brand-600 active:scale-98 text-white font-bold text-xs py-3 rounded-xl transition shadow-button"
+            >
+              Submit Review
+            </button>
+          </form>
+        </div>
+      <% } %>
+
+      <!-- Reviews Display List -->
+      <div class="<%= ReqUser ? 'lg:col-span-7' : 'lg:col-span-12' %> space-y-6">
+        <h2 class="text-lg font-bold text-gray-900 flex items-center justify-between">
+          Guest Reviews
+          <span class="text-xs bg-zinc-100 text-zinc-650 px-2.5 py-1 rounded-full font-bold">
+            <%= listing.reviews.length %> Reviews
+          </span>
+        </h2>
+
+        <% if (listing.reviews.length > 0) { %>
+          <div class="grid grid-cols-1 gap-4">
+            <% for (review of listing.reviews) { %>
+              <div class="bg-white border border-gray-100 rounded-3xl p-5 shadow-premium space-y-3 relative group/review">
+                
+                <!-- Review Header -->
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-600 font-bold text-xs border border-zinc-200">
+                      👤
+                    </div>
+                    <div>
+                      <h4 class="text-xs font-bold text-gray-800">
+                        <%= review.author.username %>
+                      </h4>
+                    </div>
+                  </div>
+
+                  <!-- Delete Review Button (Only for review author) -->
+                  <% if (ReqUser && review.author._id.equals(ReqUser._id)) { %>
+                    <form
+                      action="/wanderlust/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                      method="POST"
+                    >
+                      <button
+                        type="submit"
+                        class="opacity-0 group-hover/review:opacity-100 transition-opacity duration-200 text-gray-400 hover:text-rose-500 p-1.5 rounded-lg hover:bg-rose-50 text-xs"
+                      >
+                        <i class="fa-regular fa-trash-can"></i>
+                      </button>
+                    </form>
+                  <% } %>
+                </div>
+
+                <!-- Star Ratings -->
+                <div class="flex items-center gap-0.5 text-amber-400 text-xs">
+                  <% for (let i = 0; i < review.rating; i++) { %>
+                    <i class="fa-solid fa-star"></i>
+                  <% } %>
+                  <% for (let i = review.rating; i < 5; i++) { %>
+                    <i class="fa-regular fa-star text-zinc-200"></i>
+                  <% } %>
+                </div>
+
+                <!-- Comment Content -->
+                <p class="text-xs text-gray-650 leading-relaxed break-words">
+                  <%= review.comment %>
+                </p>
+              </div>
+            <% } %>
+          </div>
+        <% } else { %>
+          <!-- No reviews message -->
+          <div class="bg-white border border-gray-100 rounded-3xl p-8 text-center text-gray-500 text-sm shadow-premium">
+            <i class="fa-regular fa-comments text-2xl text-gray-300 block mb-3"></i>
+            No reviews yet. Be the first to share your thoughts!
+          </div>
+        <% } %>
+      </div>
+
+    </div>
+
+  </div>
+</main>

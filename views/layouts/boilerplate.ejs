@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wanderlust | Find Your Next Adventure</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CDN & Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#fff0f3',
+                100: '#ffe1e6',
+                200: '#ffc7d1',
+                300: '#ffa3b5',
+                400: '#ff708e',
+                500: '#ff385c', // Airbnb style warm rose-red
+                600: '#e61e4d',
+                700: '#c2103c',
+                800: '#9e0f34',
+              },
+              dark: '#1e1e24',
+            },
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            boxShadow: {
+              'premium': '0 6px 16px rgba(0, 0, 0, 0.06)',
+              'premium-hover': '0 16px 32px rgba(0, 0, 0, 0.12)',
+              'button': '0 4px 14px rgba(255, 56, 92, 0.3)',
+            }
+          }
+        }
+      }
+    </script>
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1"
+      type="module"
+    ></script>
+    
+    <!-- FontAwesome 6.6.0 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/ratingStar.css">
+    
+    <style>
+      body {
+        font-family: 'Outfit', sans-serif;
+      }
+      .blur-nav {
+        background-color: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('../includes/navbar.ejs') %>
+      <div class="cnt">
+        <%- include('../includes/flash.ejs') %> 
+        <%- body %>
+      </div>
+
+      <%- include('../includes/footer.ejs') %>
+  </body>
+</html>

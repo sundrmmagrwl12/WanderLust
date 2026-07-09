@@ -1,0 +1,175 @@
+<nav class="fixed inset-x-0 top-0 z-50 border-b border-gray-100 blur-nav shadow-sm">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between lg:h-20">
+      
+      <!-- Logo -->
+      <a class="flex items-center gap-2 transition hover:opacity-90" href="/wanderlust">
+        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-500 text-white shadow-button">
+          <i class="fa-solid fa-compass text-lg animate-spin-slow"></i>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-gray-900 font-sans">
+          Wander<span class="text-brand-500">lust</span>
+        </span>
+      </a>
+
+      <!-- Search Bar -->
+      <form
+        class="relative flex items-center w-full max-w-md mx-8 max-md:hidden"
+        action="/wanderlust/search"
+        method="get"
+      >
+        <div class="relative w-full">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </span>
+          <input
+            type="text"
+            name="q"
+            required
+            placeholder="Where do you want to go?"
+            class="w-full pl-11 pr-24 py-2.5 bg-white border border-gray-200 rounded-full text-sm font-medium placeholder-gray-400 shadow-sm transition-all focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none"
+          />
+          <button
+            type="submit"
+            class="absolute right-1.5 top-1.5 bottom-1.5 bg-brand-500 hover:bg-brand-600 active:scale-95 text-white text-xs font-semibold px-5 rounded-full transition-all duration-200"
+          >
+            Search
+          </button>
+        </div>
+      </form>
+
+      <!-- Navigation Actions -->
+      <div class="hidden md:flex items-center gap-6">
+        <a
+          class="text-sm font-semibold text-gray-600 transition hover:text-brand-500"
+          href="/wanderlust/listings"
+        >
+          Explore
+        </a>
+        
+        <a
+          class="text-sm font-semibold text-gray-600 transition hover:text-brand-500"
+          href="/wanderlust/listings/new"
+        >
+          Become a Host
+        </a>
+
+        <!-- Auth buttons -->
+        <div class="h-6 w-[1px] bg-gray-200"></div>
+
+        <% if (!ReqUser) { %>
+          <a
+            href="/wanderlust/login"
+            class="flex items-center gap-2 rounded-full bg-gray-900 hover:bg-brand-500 text-white px-5 py-2.5 text-xs font-bold transition-all shadow-sm hover:shadow-button"
+          >
+            <i class="fa-regular fa-user"></i>
+            Sign In
+          </a>
+        <% } %>
+        
+        <% if (ReqUser) { %>
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 border border-gray-200 rounded-full">
+              <div class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
+              <span class="text-xs font-bold text-gray-700"><%= ReqUser.username %></span>
+            </div>
+            <a
+              href="/wanderlust/logout"
+              class="text-xs font-bold text-gray-500 hover:text-brand-500 transition"
+            >
+              Logout
+            </a>
+          </div>
+        <% } %>
+      </div>
+
+      <!-- Mobile Button -->
+      <button
+        onclick="toggleMenu()"
+        class="rounded-full p-2.5 text-gray-600 hover:bg-gray-100 active:scale-95 transition md:hidden"
+      >
+        <svg
+          id="menuIcon"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h18M4 18h16" />
+        </svg>
+        <svg
+          id="closeIcon"
+          class="hidden h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobileMenu"
+      class="hidden border-t border-gray-100 py-4 transition-all duration-300 md:hidden animate-fade-in"
+    >
+      <div class="flex flex-col gap-2">
+        <a
+          class="rounded-xl px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-brand-500 transition"
+          href="/wanderlust"
+        >
+          Home
+        </a>
+        <a
+          class="rounded-xl px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-brand-500 transition"
+          href="/wanderlust/listings"
+        >
+          Explore
+        </a>
+        <a
+          class="rounded-xl px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:text-brand-500 transition"
+          href="/wanderlust/listings/new"
+        >
+          Become a Host
+        </a>
+
+        <div class="mt-4 pt-4 border-t border-gray-100 flex flex-col gap-2">
+          <% if (!ReqUser) { %>
+            <a
+              href="/wanderlust/login"
+              class="flex w-full items-center justify-center gap-2 rounded-full bg-brand-500 hover:bg-brand-600 text-white py-3 text-sm font-bold shadow-button"
+            >
+              <i class="fa-regular fa-user"></i>
+              Sign In
+            </a>
+          <% } else { %>
+            <div class="flex items-center justify-between px-4 py-2 bg-gray-50 rounded-xl">
+              <span class="text-sm font-semibold text-gray-600">Logged in as:</span>
+              <span class="text-sm font-bold text-gray-800"><%= ReqUser.username %></span>
+            </div>
+            <a
+              href="/wanderlust/logout"
+              class="flex w-full items-center justify-center rounded-full border border-gray-200 text-gray-700 py-3 text-sm font-bold hover:bg-gray-50 transition"
+            >
+              Logout
+            </a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<header class="h-16 lg:h-20"></header>
+
+<script>
+  function toggleMenu() {
+    const mobileMenu = document.getElementById("mobileMenu");
+    const menuIcon = document.getElementById("menuIcon");
+    const closeIcon = document.getElementById("closeIcon");
+    
+    mobileMenu.classList.toggle("hidden");
+    menuIcon.classList.toggle("hidden");
+    closeIcon.classList.toggle("hidden");
+  }
+</script>

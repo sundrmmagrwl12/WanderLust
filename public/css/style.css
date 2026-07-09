@@ -1,0 +1,19 @@
+body{
+    font-family: system-ui;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.cnt{
+    flex: 1;
+}
+footer{
+    color:  hsl(var(--foreground));
+}
+.blur-red-bg {
+  background-color: rgba(187, 86, 86, 0.25); /* red tint */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+

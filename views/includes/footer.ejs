@@ -1,0 +1,88 @@
+<footer id="footer" class="relative bg-zinc-950 text-gray-400 mt-20 border-t border-zinc-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    
+    <!-- Brand Info -->
+    <div class="space-y-4">
+      <a class="flex items-center gap-2" href="/wanderlust">
+        <div class="flex h-9 w-9 items-center justify-center rounded-full bg-brand-500 text-white">
+          <i class="fa-solid fa-compass text-md"></i>
+        </div>
+        <span class="text-lg font-bold tracking-tight text-white font-sans">
+          Wander<span class="text-brand-500">lust</span>
+        </span>
+      </a>
+      <p class="text-sm leading-relaxed text-zinc-400">
+        Wanderlust is a premier travel listing platform designed to make exploring the world easy, fun, and unforgettable. Find your next home away from home.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-zinc-200 text-sm font-bold tracking-wider uppercase mb-5">Quick Links</h3>
+      <ul class="space-y-3 text-sm">
+        <li><a href="#" class="hover:text-brand-500 transition-colors">About Us</a></li>
+        <li><a href="/wanderlust" class="hover:text-brand-500 transition-colors">Home</a></li>
+        <li><a href="/wanderlust/listings/new" class="hover:text-brand-500 transition-colors">Become a Host</a></li>
+        <li><a href="#" class="hover:text-brand-500 transition-colors">Privacy Policy</a></li>
+        <li><a href="#" class="hover:text-brand-500 transition-colors">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <!-- Customer Service -->
+    <div>
+      <h3 class="text-zinc-200 text-sm font-bold tracking-wider uppercase mb-5">Support</h3>
+      <ul class="space-y-3 text-sm">
+        <li><a href="#" class="hover:text-brand-500 transition-colors">Help Center</a></li>
+        <li><a href="#" class="hover:text-brand-500 transition-colors">Safety Guidelines</a></li>
+        <li><a href="/wanderlust/listings" class="hover:text-brand-500 transition-colors">Explore Stays</a></li>
+        <li><a href="#" class="hover:text-brand-500 transition-colors">Cancellation Options</a></li>
+      </ul>
+    </div>
+
+    <!-- Newsletter & Social Media -->
+    <div class="space-y-5">
+      <h3 class="text-zinc-200 text-sm font-bold tracking-wider uppercase mb-1">Stay Connected</h3>
+      <p class="text-sm text-zinc-400">
+        Subscribe to our newsletter for exclusive deals & travel guides.
+      </p>
+      <form action="/wanderlust/subscribe" method="POST" class="flex flex-col gap-2">
+        <div class="flex">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+            class="w-full px-4 py-2.5 rounded-l-xl focus:outline-none bg-zinc-900 border border-zinc-800 focus:border-brand-500 text-sm text-white placeholder-zinc-500 transition"
+          />
+          <button
+            type="submit"
+            class="bg-brand-500 hover:bg-brand-600 active:scale-95 text-white font-semibold text-xs px-5 rounded-r-xl transition-all duration-200"
+          >
+            Join
+          </button>
+        </div>
+      </form>
+
+      <!-- Social Icons -->
+      <div class="flex space-x-3 pt-2">
+        <a href="#" class="w-9 h-9 flex items-center justify-center bg-zinc-900 hover:bg-brand-500 hover:text-white rounded-xl transition text-sm">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="w-9 h-9 flex items-center justify-center bg-zinc-900 hover:bg-brand-500 hover:text-white rounded-xl transition text-sm">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="#" class="w-9 h-9 flex items-center justify-center bg-zinc-900 hover:bg-brand-500 hover:text-white rounded-xl transition text-sm">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#" class="w-9 h-9 flex items-center justify-center bg-zinc-900 hover:bg-brand-500 hover:text-white rounded-xl transition text-sm">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Bottom -->
+  <div class="border-t border-zinc-900 py-6 text-center text-xs text-zinc-650">
+    &copy; <%= new Date().getFullYear() %> Wanderlust Pvt Ltd. All rights reserved.
+  </div>
+</footer>

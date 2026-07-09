@@ -1,0 +1,74 @@
+import Listing from "../models/listing.js";
+const listingController = {
+  index: async (req, res) => {
+    let sort = req.query.sort;
+    let allListings;
+
+    if (sort === "low") {
+      allListings = await Listing.find({}).sort({ price: 1 });
+    } else if (sort === "high") {
+      allListings = await Listing.find({}).sort({ price: -1 });
+    } else {
+      allListings = await Listing.find({});
+    }
+
+    res.render("listing/index", { allListings, sort });
+  },
+  renderNew: async (req, res) => {
+    res.render("./listing/new.ejs");
+  },
+  createListing: async (req, res, next) => {
+    const path = req.file.path;
+    const filename = req.file.filename;
+    const newListing = new Listing(req.body.listing);
+    newListing.owner = req.user._id;
+    newListing.image = { path, filename };
+    await newListing.save();
+    req.flash("success", "New Listing is Created!");
+    res.redirect("/wanderlust/listings");
+  },
+  showListing: async (req, res) => {
+    const { id } = req.params;
+    const listing = await Listing.findById(id)
+      .populate({ path: "reviews", populate: { path: "author" } })
+      .populate("owner");
+    if (!listing) {
+      req.flash("error", "Listing you requested for does not exist");
+      return res.redirect("/wanderlust/listings");
+    }
+    res.render("./listing/show.ejs", { listing });
+  },
+  updateListing: async (req, res) => {
+    const { id } = req.params;
+    const listing = await Listing.findByIdAndUpdate(id, {
+      ...req.body.listing,
+    });
+    if (typeof req.file != "undefined") {
+      listing.image = {
+        filename: req.file.filename,
+        path: req.file.path,
+      };
+      await listing.save();
+    }
+    req.flash("success", "Listing is Updated!");
+    res.redirect(`/wanderlust/listings/${id}`);
+  },
+  renderEditListingPage: async (req, res) => {
+    const { id } = req.params;
+    const listing = await Listing.findById(id);
+    if (!listing) {
+      req.flash("error", "Listing you requested for does not exist");
+      return res.redirect("/wanderlust/listings");
+    }
+    const originalUrl = listing.image.path;
+    res.render("./listing/edit.ejs", { listing, originalUrl });
+  },
+  distroyListing: async (req, res) => {
+    const { id } = req.params;
+    const listing = await Listing.findByIdAndDelete(id);
+    req.flash("success", "Listing is Deleted!");
+    res.redirect("/wanderlust/listings");
+  },
+};
+
+export default listingController;

@@ -1,0 +1,41 @@
+<% layout('/layouts/boilerplate.ejs') %>
+<section
+  class="relative flex items-center justify-center h-[calc(85vh-4rem)] lg:h-[calc(90vh-5rem)] overflow-hidden"
+>
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src="/asset/hero.jpg"
+      alt="Travel destination"
+      class="w-full h-full object-cover scale-105"
+    />
+    <!-- Deepened dark overlay for high text contrast -->
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-black/65 via-black/40 to-slate-50"
+    ></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center mt-[-2rem]">
+    <div class="max-w-4xl mx-auto space-y-6">
+      <span
+        class="inline-flex items-center gap-1.5 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-xs font-bold text-white border border-white/20 uppercase tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+      >
+        ✨ Discover your next sanctuary
+      </span>
+
+      <h1
+        class="font-serif text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight tracking-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]"
+      >
+        Find Your Home in the
+        <span class="block text-brand-400 mt-2 font-serif italic drop-shadow-[0_4px_12px_rgba(0,0,0,0.6)]">World's Loveliest Places</span>
+      </h1>
+
+      <p class="text-sm sm:text-base lg:text-lg text-white/95 max-w-xl mx-auto font-sans font-semibold leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+        From tranquil beachside villas to cozy alpine retreats, explore handpicked stays designed for unforgettable experiences.
+      </p>
+    </div>
+  </div>
+</section>
+<%- include('../listing/index.ejs') %>
+

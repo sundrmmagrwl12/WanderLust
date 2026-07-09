@@ -1,0 +1,98 @@
+<% layout('/layouts/boilerplate.ejs') %>
+
+<main class="flex min-h-[80vh] items-center justify-center bg-slate-50/50 px-4 py-12">
+  <div class="w-full max-w-md bg-white rounded-3xl border border-gray-100 p-6 sm:p-8 shadow-premium">
+    
+    <!-- Heading -->
+    <div class="text-center mb-8">
+      <div class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-50 text-brand-500 mb-4">
+        <i class="fa-solid fa-user-plus text-lg"></i>
+      </div>
+      <h2 class="font-serif text-2xl font-bold text-gray-900">
+        Create Account
+      </h2>
+      <p class="text-xs font-semibold text-gray-400 mt-1 uppercase tracking-wider">Join Wanderlust Today</p>
+    </div>
+
+    <!-- Signup Form -->
+    <form action="/wanderlust/signup" method="POST" class="space-y-5">
+
+      <!-- Username -->
+      <div class="space-y-1">
+        <label class="block text-xs font-bold text-gray-550 uppercase tracking-wider mb-2">
+          Username
+        </label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+            <i class="fa-regular fa-user text-xs"></i>
+          </span>
+          <input
+            type="text"
+            name="username"
+            required
+            placeholder="Choose a username"
+            class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-2xl bg-zinc-50 text-sm focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none transition"
+          />
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="space-y-1">
+        <label class="block text-xs font-bold text-gray-550 uppercase tracking-wider mb-2">
+          Email Address
+        </label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+            <i class="fa-regular fa-envelope text-xs"></i>
+          </span>
+          <input
+            type="email"
+            name="email"
+            required
+            placeholder="yourname@example.com"
+            class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-2xl bg-zinc-50 text-sm focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none transition"
+          />
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="space-y-1">
+        <label class="block text-xs font-bold text-gray-550 uppercase tracking-wider mb-2">
+          Password
+        </label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
+            <i class="fa-solid fa-lock text-xs"></i>
+          </span>
+          <input
+            type="password"
+            name="password"
+            required
+            placeholder="Create a strong password"
+            class="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-2xl bg-zinc-50 text-sm focus:bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-100 focus:outline-none transition"
+          />
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="w-full bg-brand-500 hover:bg-brand-600 active:scale-98 text-white font-bold text-xs py-3.5 rounded-xl transition shadow-button mt-4"
+      >
+       Register
+      </button>
+
+    </form>
+
+    <!-- Sign In Redirect -->
+    <div class="border-t border-gray-100 mt-6 pt-5 text-center">
+      <p class="text-xs text-gray-500 font-semibold">
+        Already have an account?
+        <a href="/wanderlust/login" class="text-brand-500 hover:text-brand-600 font-bold transition">
+          Sign In
+        </a>
+      </p>
+    </div>
+
+  </div>
+</main>
