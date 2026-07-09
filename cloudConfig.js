@@ -13,8 +13,8 @@ const storage = new CloudinaryStorage({
     folder: "wanderlust_DEV",
     allowed_formats: ["png", "jpg", "jpeg", "webp"],
     transformation: [
-      { width: 1000, crop: "limit", quality: "auto", fetch_format: "auto" }
-    ]
+      { width: 1000, crop: "limit", quality: "auto", fetch_format: "auto" },
+    ],
   },
 });
 
