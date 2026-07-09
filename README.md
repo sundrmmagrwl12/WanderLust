@@ -17,7 +17,7 @@ Wanderlust is a premium, full-stack travel marketplace that allows users to disc
 
 | 🏠 Homepage | 🔍 Listings Grid |
 | :--- | :--- |
-| ![Homepage Preview](https://via.placeholder.com/800x450?text=Wanderlust+Home+Page) | ![Listings Preview](https://via.placeholder.com/800x450?text=Wanderlust+Listings+Grid) |
+| ![Homepage Preview](./public/asset/homepage-desktop.png) | ![Listings Preview](./public/asset/listings-grid.png) |
 
 ---
 
@@ -117,7 +117,7 @@ Wanderlust/
 - **Cloud Database**: MongoDB Atlas
 - **Cloud Media Storage**: Cloudinary
 - **Web Application Host**: Deployed via Render / Vercel
-- **Live Site**: [Wanderlust Live Demo](https://github.com/sundrmmagrwl12/WanderLust) *(Update with your live URL)*
+- **Live Site**: [Wanderlust Live Demo](https://wanderlust-wx83.onrender.com/wanderlust/listings)
 
 ---
 
