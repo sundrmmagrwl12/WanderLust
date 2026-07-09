@@ -130,6 +130,17 @@ app.post("/wanderlust/subscribe", (req, res) => {
   req.flash("success", "Thank you for subscribing to Wanderlust!");
   res.redirect("/wanderlust#footer");
 });
+app.get("/wanderlust/test-env-status", (req, res) => {
+  res.json({
+    CLOUD_NAME: !!process.env.CLOUD_NAME,
+    API_KEY: !!process.env.API_KEY,
+    API_SECRET: !!process.env.API_SECRET,
+    CLOUD_NAME_LEN: process.env.CLOUD_NAME ? process.env.CLOUD_NAME.length : 0,
+    API_KEY_LEN: process.env.API_KEY ? process.env.API_KEY.length : 0,
+    API_SECRET_LEN: process.env.API_SECRET ? process.env.API_SECRET.length : 0,
+  });
+});
+
 //404 handler — matches ALL unknown routes
 app.use((req, res, next) => {
   // console.log(req.method, req.path);
